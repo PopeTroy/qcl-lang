@@ -1,0 +1,12 @@
+[workspace]
+members = [
+    "compiler",
+    "runtime"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Celsius Tech Media Group <info@celsiustechmediagroup.co.za>"]
+license = "MIT OR Apache-2.0"
