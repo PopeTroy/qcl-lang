@@ -1,0 +1,17 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+COMMENT = _{ "//" ~ (!"\n" ~ ANY)* }
+
+ident = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
+number = @{ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? ~ (("^" | "e" | "E") ~ ("+" | "-")? ~ ASCII_DIGIT+)? }
+
+module_decl = { "module" ~ ident ~ ";" }
+
+dim_decl = { "dimension" ~ ident ~ ("=" ~ dim_expr)? ~ ( "(" ~ "symbol:" ~ ident ~ ")" )? ~ ";" }
+dim_expr = { ident ~ (("/" | "*") ~ ident)* }
+
+unit_decl = { "unit" ~ ident ~ ":" ~ ident ~ "=" ~ number ~ "_" ~ ident ~ ( "(" ~ "exact" ~ ")" )? ~ ";" }
+
+frame_decl = { "frame" ~ ident ~ ( "(" ~ ident ~ ")" )? ~ ";" }
+
+statement = _{ dim_decl | unit_decl | frame_decl }
+program = { SOI ~ module_decl ~ statement* ~ EOI }
