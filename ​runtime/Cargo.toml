@@ -1,0 +1,8 @@
+[package]
+name = "qcl-runtime"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+nalgebra = "0.33"
