@@ -1,0 +1,22 @@
+name: TRL4 Hardware-in-Loop Simulation
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  hil-testbench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set Toolchains
+        run: |
+          chmod +x ./scripts/toolchain_pins.sh
+          source ./scripts/toolchain_pins.sh
+
+      - name: Build Hardware Simulators
+        run: cargo build --workspace --release
+
+      - name: Run Hardware Loop Benchmarks
+        run: cargo test --package qcl-compiler --lib -- solver::geo_algebra
