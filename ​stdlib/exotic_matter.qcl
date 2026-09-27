@@ -1,0 +1,9 @@
+module exotic_matter;
+
+import kardashev_core;
+
+dimension StressEnergy = Force / (Length ^ 2);
+dimension ExoticMassDensity = Mass / (Length ^ 3);
+
+const casimir_force_coeff: Energy = 1.3e-27_J;
+const alcubierre_energy_scale: StressEnergy = -1.0e30_N/m^2;
