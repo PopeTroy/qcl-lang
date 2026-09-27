@@ -1,0 +1,47 @@
+module physics_core;
+
+//--- 1. DIMENSIONAL BASIS (SI 2019 Redefinition)
+dimension Length (symbol: L);
+dimension Mass (symbol: M);
+dimension Time (symbol: T);
+dimension Current (symbol: I);
+dimension Temp (symbol: Theta);
+dimension Amount (symbol: N);
+dimension Luminous (symbol: J);
+
+// Derived Dimensions
+dimension Velocity = Length / Time;
+dimension Accel = Velocity / Time;
+dimension Force = Mass * Accel;
+dimension Energy = Force * Length;
+dimension Power = Energy / Time;
+dimension Pressure = Force / (Length ^ 2);
+
+//--- 2. BASE SI UNITS
+unit meter: Length = 1.0_m (exact);
+unit kilogram: Mass = 1.0_kg (exact);
+unit second: Time = 1.0_s (exact);
+unit ampere: Current = 1.0_A (exact);
+unit kelvin: Temp = 1.0_K (exact);
+unit mole: Amount = 1.0_mol (exact);
+unit candela: Luminous = 1.0_cd (exact);
+
+// Derived Units
+unit newton: Force = 1.0_kg * 1.0_m / (1.0_s ^ 2);
+unit joule: Energy = 1.0_N * 1.0_m;
+unit watt: Power = 1.0_J / 1.0_s;
+unit pascal: Pressure = 1.0_N / (1.0_m ^ 2);
+
+// Physical Constants
+const c: Velocity = 299792458.0_m/s;
+const h: Action = 6.62607015e-34_J_s;
+const k_B: Entropy = 1.380649e-23_J/K;
+const e_charge: Charge = 1.602176634e-19_C;
+const G: GravParam = 6.67430e-11_m^3/kg/s^2;
+
+//--- 3. REFERENCE FRAMES
+frame ICRF;
+frame ITRF2020;
+frame LVLH(ICRF);
+frame BodyFixed(ITRF2020);
+frame Sensor(BodyFixed);
