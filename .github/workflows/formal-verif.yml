@@ -1,0 +1,21 @@
+name: Lean 4 / Formal Verification Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+
+jobs:
+  lean-proofs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean 4
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          source $HOME/.elan/env
+          elan default leanprover/lean4:v4.9.0
+      - name: Verify Proofs
+        run: |
+          source $HOME/.elan/env
+          cd verification/lean4
+          lean DimSoundness.lean
