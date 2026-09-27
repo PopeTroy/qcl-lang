@@ -1,0 +1,32 @@
+// stdlib/kardashev_core.qcl
+// KARDASHEV TYPE 1-4 DIMENSIONAL BASIS & CONSTANTS
+module kardashev_core;
+
+//--- 1. EXTENDED DIMENSIONAL BASIS
+dimension Length (symbol: L);
+dimension Mass (symbol: M);
+dimension Time (symbol: T);
+dimension Current (symbol: I);
+dimension Temp (symbol: Theta);
+dimension Amount (symbol: N);
+dimension Luminous (symbol: J);
+
+// Information & Energy Accounting (Landauer/Bennett Basis)
+dimension Information (symbol: Bit);
+dimension QuantumInfo (symbol: Qubit);
+dimension Entropy (symbol: S);
+
+// Derived Dimensions
+dimension Velocity = Length / Time;
+dimension Accel = Velocity / Time;
+dimension Force = Mass * Accel;
+dimension Energy = Force * Length;
+dimension EnergyPerOp = Energy / Information;
+dimension SpacetimeCurvature = 1 / (Length ^ 2);
+
+//--- 2. CONSTANTS & BOUNDS
+const c: Velocity = 299792458.0_m/s;
+const h_bar: Action = 1.054571817e-34_J_s;
+const k_B: Entropy = 1.380649e-23_J/K;
+const G: GravParam = 6.67430e-11_m^3/kg/s^2;
+const landauer_limit: EnergyPerOp = 2.87e-21_J/Bit; // Minimum thermodynamic dissipation at 300K
