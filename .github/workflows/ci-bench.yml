@@ -1,0 +1,37 @@
+name: QCL TRL4 Bench & Verification
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Codebase
+      uses: actions/checkout@v4
+
+    - name: Install System Dependencies (LLVM 18 & Z3)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-18 llvm-18-dev clang-18 libz3-dev z3
+
+    - name: Set Environment Toolchains
+      run: |
+        chmod +x ./scripts/toolchain_pins.sh
+        source ./scripts/toolchain_pins.sh
+        echo "LLVM_SYS_181_PREFIX=/usr/lib/llvm-18" >> $GITHUB_ENV
+
+    - name: Install Rust Toolchain
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: "1.79.0"
+
+    - name: Workspace Verification
+      run: cargo check --workspace
+
+    - name: Run Test Suite
+      run: cargo test --workspace --verbose
