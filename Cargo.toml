@@ -31,7 +31,7 @@ rand = "0.8"
 rand_distr = "0.4"
 statrs = "0.16"
 z3 = { version = "0.15", features = ["serde"] }
-egg = "0.12"
+egg = "0.10" # TACTICAL FIX: Downgraded to match crates.io release (0.10.0)
 pest = "2.7"
 pest_derive = "2.7"
 inkwell = { version = "0.4.0", features = ["llvm18-0"] }
