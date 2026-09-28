@@ -4,7 +4,6 @@ version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
-rust-version.workspace = true
 
 [dependencies]
 anyhow.workspace = true
@@ -12,17 +11,17 @@ thiserror.workspace = true
 tracing.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-nalgebra.workspace = true
 z3.workspace = true
 egg.workspace = true
 pest.workspace = true
 pest_derive.workspace = true
-inkwell.workspace = true
+petgraph.workspace = true
+rustc-hash.workspace = true
+indexmap.workspace = true
+clap.workspace = true
+ariadne.workspace = true
+codespan-reporting.workspace = true
 
-[lib]
-name = "qcl_compiler"
-path = "src/lib.rs"
-
-[[bin]]
-name = "qclc"
-path = "src/main.rs"
+# Cranelift Native IR lowering
+cranelift-codegen.workspace = true
+cranelift-wasm.workspace = true
