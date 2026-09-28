@@ -30,7 +30,7 @@ impl DimensionVector {
         Self { exponents: std::array::from_fn(|i| self.exponents[i] * n) }
     }
 
-    pub fn to_z3_int_vector<'ctx>(&self, ctx: &'ctx Context, prefix: &str) -> Vec<Int<'ctx>> {
+    pub fn to_z3_int_vector<'ctx>(&self, ctx: &'ctx Context, prefix: &str) -> Vec<Int> {
         self.exponents.iter().enumerate().map(|(i, _)| {
             Int::new_const(ctx, format!("{}_{}", prefix, i))
         }).collect()
