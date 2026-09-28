@@ -47,7 +47,7 @@ codespan-reporting = "0.11"
 
 # UNIFIED WASM / CRANELIFT CODEGEN BACKEND
 wasmtime = { version = "20.0", features = ["component-model", "async", "cranelift"], default-features = false }
-cranelift-codegen = { version = "0.107", features = ["target-x86_64", "target-aarch64", "target-wasm32"] }
+cranelift-codegen = { version = "0.107", features = ["std"] }
 cranelift-wasm = { version = "0.107", features = ["std"] }
 
 [profile.release]
