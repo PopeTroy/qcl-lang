@@ -1,8 +1,0 @@
-module quantum_info;
-
-import kardashev_core;
-
-unit bit: Information = 1.0_Bit (exact);
-unit qubit: QuantumInfo = 1.0_Qubit (exact);
-
-const von_neumann_entropy_max: Entropy = 1.380649e-23_J/K;
