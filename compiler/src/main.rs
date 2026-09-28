@@ -3,6 +3,7 @@ mod hir;
 mod solver;
 mod codegen;
 
+use std::collections::HashMap;
 use anyhow::Result;
 use inkwell::context::Context;
 use codegen::llvm_backend::LlvmCodegen;
@@ -17,7 +18,8 @@ fn main() -> Result<()> {
     let velocity = length.div(&time);
     
     println!("Validating velocity dimension solver bounds...");
-    unify_dimensions(&velocity, &velocity)?;
+    unify_dimensions(&velocity, &velocity, &HashMap::new())
+        .map_err(anyhow::Error::msg)?;
     println!("Dimension solver: SAT.");
 
     // Test LLVM Codegen Setup
