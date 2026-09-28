@@ -22,6 +22,7 @@ clap.workspace = true
 ariadne.workspace = true
 codespan-reporting.workspace = true
 
-# Cranelift Native IR lowering
+# Cranelift & LLVM Codegen Backends
 cranelift-codegen.workspace = true
 cranelift-wasm.workspace = true
+inkwell.workspace = true
