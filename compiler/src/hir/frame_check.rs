@@ -1,45 +1,36 @@
 use std::collections::HashMap;
-use thiserror::Error;
 
-pub type FrameId = String;
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct FrameId(pub String);
 
-#[derive(Error, Debug)]
-pub enum FrameError {
-    #[error("Incompatible Frames: LHS frame '{lhs}' does not match RHS frame '{rhs}'")]
-    IncompatibleFrames { lhs: FrameId, rhs: FrameId },
-}
-
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct TensorType {
     pub rank: usize,
     pub frame: FrameId,
-    pub dimension_id: String,
+}
+
+pub enum BinOp {
+    Add,
+    Sub,
+    Mul,
+}
+
+#[derive(Debug)]
+pub enum FrameError {
+    IncompatibleFrames { lhs: FrameId, rhs: FrameId, op: String },
 }
 
 pub struct TransformGraph {
-    pub edges: HashMap<FrameId, FrameId>,
+    pub edges: HashMap<(FrameId, FrameId), String>,
 }
 
 impl TransformGraph {
-    pub fn new() -> Self {
-        Self { edges: HashMap::new() }
-    }
-
-    pub fn find_path(&self, from: &str, to: &str) -> Option<Vec<String>> {
-        if from == to {
-            return Some(vec![from.to_string()]);
+    pub fn find_path(&self, from: &FrameId, to: &FrameId) -> Option<Vec<String>> {
+        if let Some(edge) = self.edges.get(&(from.clone(), to.clone())) {
+            Some(vec![edge.clone()])
+        } else {
+            None
         }
-        let mut current = from;
-        let mut path = vec![current.to_string()];
-
-        while let Some(next) = self.edges.get(current) {
-            path.push(next.clone());
-            if next == to {
-                return Some(path);
-            }
-            current = next;
-        }
-        None
     }
 }
 
@@ -52,19 +43,26 @@ impl FrameChecker {
         &self,
         lhs: &TensorType,
         rhs: &TensorType,
+        _op: BinOp,
     ) -> Result<TensorType, FrameError> {
+        // Scalars (Rank 0) are frame invariant
         if lhs.rank == 0 && rhs.rank == 0 {
             return Ok(lhs.clone());
         }
 
+        // Vectors/Tensors must share Frame ID at point of operation
         if lhs.frame != rhs.frame {
+            // Attempt Auto-Transform: Find path in Graph
             if let Some(_path) = self.transform_graph.find_path(&rhs.frame, &lhs.frame) {
-                // Auto-transform path exists; coerce to LHS frame
+                // Insert Implicit Transform Node into MIR
+                let mut rhs_transformed = rhs.clone();
+                rhs_transformed.frame = lhs.frame.clone();
                 Ok(lhs.clone())
             } else {
                 Err(FrameError::IncompatibleFrames {
                     lhs: lhs.frame.clone(),
                     rhs: rhs.frame.clone(),
+                    op: "BinaryOp".to_string(),
                 })
             }
         } else {
