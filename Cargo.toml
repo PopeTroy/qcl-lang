@@ -42,7 +42,7 @@ indexmap = { version = "2.0", features = ["serde-1"] }
 
 # CLI / DIAGNOSTICS
 clap = { version = "4.5", features = ["derive", "env", "std", "unicode"] }
-ariadne = { version = "0.4", features = ["std"] }
+ariadne = "0.4"
 codespan-reporting = "0.11"
 
 # UNIFIED WASM / CRANELIFT CODEGEN BACKEND
