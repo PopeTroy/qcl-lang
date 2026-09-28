@@ -17,9 +17,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Recursively Purge All Toolchain Pins
-        run: |
-          find . -name "rust-toolchain*" -type f -delete
+      - name: Purge Toolchain Locks
+        run: find . -name "rust-toolchain*" -type f -delete
 
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -28,17 +27,10 @@ jobs:
           override: true
           components: clippy, rustfmt
 
-      - name: Enforce Default Toolchain Override
-        run: |
-          rustup default stable
-          rustup override set stable
-          rustc --version
-          cargo --version
-
-      - name: Install System Dependencies (Z3)
+      - name: Install System Dependencies (Z3 & LLVM)
         run: |
           sudo apt-get update
-          sudo apt-get install -y z3 libz3-dev
+          sudo apt-get install -y z3 libz3-dev llvm-18-dev libclang-18-dev clang
 
       - name: Check Workspace Topology
         run: cargo check --workspace
