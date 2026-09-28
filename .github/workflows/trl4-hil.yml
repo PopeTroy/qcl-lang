@@ -21,10 +21,10 @@ jobs:
           override: true
           components: clippy, rustfmt
 
-      - name: Install System Dependencies (LLVM 18, Clang 18, Z3)
+      - name: Install System Dependencies (LLVM 17, Clang 17, Z3)
         run: |
           sudo apt-get update
-          sudo apt-get install -y llvm-18 llvm-18-dev clang-18 z3 libz3-dev
+          sudo apt-get install -y llvm-17 llvm-17-dev clang-17 z3 libz3-dev
 
       - name: Set Toolchains
         run: |
