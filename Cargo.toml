@@ -37,7 +37,7 @@ pest_derive = "2.7"
 
 # GRAPH / HASHING
 petgraph = { version = "0.6", features = ["serde-1", "graphmap", "stable_graph"] }
-rustc-hash = "1.2"
+rustc-hash = "1.1"
 indexmap = { version = "2.0", features = ["serde-1"] }
 
 # CLI / DIAGNOSTICS
@@ -45,7 +45,7 @@ clap = { version = "4.5", features = ["derive", "env", "std", "unicode"] }
 ariadne = { version = "0.4", features = ["std"] }
 codespan-reporting = "0.11"
 
-# UNIFIED WASM / CRANELIFT CODEGEN BACKEND (NO INKWELL/LLVM ODR CONFLICTS)
+# UNIFIED WASM / CRANELIFT CODEGEN BACKEND
 wasmtime = { version = "20.0", features = ["component-model", "async", "cranelift"], default-features = false }
 cranelift-codegen = { version = "0.107", features = ["target-x86_64", "target-aarch64", "target-wasm32"] }
 cranelift-wasm = { version = "0.107", features = ["std"] }
