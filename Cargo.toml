@@ -11,7 +11,7 @@ version = "0.4.0"
 edition = "2021"
 authors = ["Celsius Tech Media Group <info@celsiustechmediagroup.co.za>"]
 license = "MIT OR Apache-2.0"
-rust-version = "1.79"
+rust-version = "1.80"
 
 [workspace.dependencies]
 anyhow = "1.0"
@@ -34,7 +34,7 @@ z3 = "0.15"
 egg = "0.10"
 pest = "2.7"
 pest_derive = "2.7"
-inkwell = { version = "0.4.0", features = ["llvm15-0"] }
+inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm18-0"] }
 wasmtime = { version = "20.0", features = ["component-model", "async", "cranelift"] }
 
 [profile.release]
