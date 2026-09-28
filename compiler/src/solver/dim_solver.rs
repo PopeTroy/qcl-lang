@@ -1,5 +1,8 @@
-use z3::{Context, Solver, SatResult, ast::{Ast, Int}};
 use std::collections::HashMap;
+use z3::{
+    ast::{Ast, Int},
+    Context, SatResult, Solver,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct DimensionVector {
@@ -19,21 +22,29 @@ impl DimensionVector {
     }
 
     pub fn mul(&self, other: &Self) -> Self {
-        Self { exponents: std::array::from_fn(|i| self.exponents[i] + other.exponents[i]) }
+        Self {
+            exponents: std::array::from_fn(|i| self.exponents[i] + other.exponents[i]),
+        }
     }
 
     pub fn div(&self, other: &Self) -> Self {
-        Self { exponents: std::array::from_fn(|i| self.exponents[i] - other.exponents[i]) }
+        Self {
+            exponents: std::array::from_fn(|i| self.exponents[i] - other.exponents[i]),
+        }
     }
 
     pub fn pow(&self, n: i32) -> Self {
-        Self { exponents: std::array::from_fn(|i| self.exponents[i] * n) }
+        Self {
+            exponents: std::array::from_fn(|i| self.exponents[i] * n),
+        }
     }
 
     pub fn to_z3_int_vector<'ctx>(&self, ctx: &'ctx Context, prefix: &str) -> Vec<Int> {
-        self.exponents.iter().enumerate().map(|(i, _)| {
-            Int::new_const(ctx, format!("{}_{}", prefix, i))
-        }).collect()
+        self.exponents
+            .iter()
+            .enumerate()
+            .map(|(i, _)| Int::new_const(ctx, format!("{}_{}", prefix, i)))
+            .collect()
     }
 
     pub fn assert_eq_z3(&self, solver: &Solver, ctx: &Context, vars: &[Int]) {
@@ -65,6 +76,9 @@ pub fn unify_dimensions(
     if solver.check() == SatResult::Sat {
         Ok(HashMap::new())
     } else {
-        Err(format!("TypeError: Dimension mismatch. Expected: {:?}, Actual: {:?}", expected, actual))
+        Err(format!(
+            "TypeError: Dimension mismatch. Expected: {:?}, Actual: {:?}",
+            expected, actual
+        ))
     }
 }
