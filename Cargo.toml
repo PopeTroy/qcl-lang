@@ -45,10 +45,11 @@ clap = { version = "4.5", features = ["derive", "env", "std", "unicode"] }
 ariadne = "0.4"
 codespan-reporting = "0.11"
 
-# UNIFIED WASM / CRANELIFT CODEGEN BACKEND
+# UNIFIED WASM / CRANELIFT / LLVM CODEGEN BACKEND
 wasmtime = { version = "20.0", features = ["component-model", "async", "cranelift"], default-features = false }
 cranelift-codegen = { version = "0.107", features = ["std"] }
 cranelift-wasm = { version = "0.107", features = ["std"] }
+inkwell = { version = "0.5.0", features = ["llvm18-0"] }
 
 [profile.release]
 lto = "thin"
