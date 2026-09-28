@@ -1,3 +1,5 @@
+# 1. Update Cargo.toml with the pinned commit
+cat << 'EOF' > Cargo.toml
 [workspace]
 resolver = "2"
 members = [
@@ -34,7 +36,7 @@ z3 = { version = "0.15", features = ["serde"] }
 egg = "0.10"
 pest = "2.7"
 pest_derive = "2.7"
-inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm17-0"] }
+inkwell = { git = "https://github.com/TheDan64/inkwell", rev = "0d20d4188b4827fb33fceef6141a45ceec096f60", features = ["llvm17-0"] }
 wasmtime = { version = "20.0", features = ["component-model-async", "cranelift"] }
 
 [profile.release]
@@ -43,3 +45,9 @@ codegen-units = 1
 panic = "abort"
 strip = "symbols"
 opt-level = 3
+EOF
+
+# 2. Commit and Push
+git add Cargo.toml .github/workflows/trl4-hil.yml
+git commit -m "fix: pin inkwell commit to bypass edition2024 cargo requirement"
+git push origin main
