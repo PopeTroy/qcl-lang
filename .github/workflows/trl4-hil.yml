@@ -14,15 +14,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install System Dependencies (LLVM 17, Clang 17, Z3)
+      - name: Install System Dependencies (LLVM 15, Clang 15, Z3)
         run: |
           sudo apt-get update
-          sudo apt-get install -y llvm-17 llvm-17-dev clang-17 z3 libz3-dev
+          sudo apt-get install -y llvm-15 llvm-15-dev clang-15 z3 libz3-dev
 
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: 'stable'
+          toolchain: '1.79.0'
           components: clippy, rustfmt
 
       - name: Check Workspace Topology
