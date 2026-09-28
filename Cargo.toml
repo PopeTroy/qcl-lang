@@ -11,7 +11,7 @@ version = "0.4.0"
 edition = "2021"
 authors = ["Celsius Tech Media Group <info@celsiustechmediagroup.co.za>"]
 license = "MIT OR Apache-2.0"
-rust-version = "1.79"
+rust-version = "1.85"
 
 [workspace.dependencies]
 anyhow = "1.0"
