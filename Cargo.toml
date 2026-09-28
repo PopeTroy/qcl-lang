@@ -30,7 +30,7 @@ num-complex = "0.4"
 rand = "0.8"
 rand_distr = "0.4"
 statrs = "0.16"
-z3 = { version = "0.15", features = ["serde"] }
+z3 = "0.15"
 egg = "0.10"
 pest = "2.7"
 pest_derive = "2.7"
