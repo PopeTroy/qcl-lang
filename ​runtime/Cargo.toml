@@ -3,6 +3,20 @@ name = "qcl-runtime"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
 
 [dependencies]
-nalgebra = "0.33"
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+serde.workspace = true
+bytes.workspace = true
+parking_lot.workspace = true
+crossbeam.workspace = true
+rand.workspace = true
+wasmtime.workspace = true
+
+[lib]
+name = "qcl_runtime"
+path = "src/lib.rs"
