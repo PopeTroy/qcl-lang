@@ -14,10 +14,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install System Dependencies (Z3)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y z3 libz3-dev
+      - name: Purge Toolchain Pin Files
+        run: rm -f rust-toolchain rust-toolchain.toml
 
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -25,6 +23,11 @@ jobs:
           toolchain: stable
           override: true
           components: clippy, rustfmt
+
+      - name: Install System Dependencies (Z3)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y z3 libz3-dev
 
       - name: Check Workspace Topology
         run: cargo check --workspace
@@ -34,4 +37,3 @@ jobs:
 
       - name: Run Workspace Tests
         run: cargo test --workspace
-        
