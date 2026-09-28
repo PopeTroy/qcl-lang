@@ -22,7 +22,8 @@ jobs:
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: '1.79.0'
+          toolchain: 'stable'
+          override: true
           components: clippy, rustfmt
 
       - name: Check Workspace Topology
