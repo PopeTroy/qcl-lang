@@ -34,7 +34,7 @@ z3 = { version = "0.15", features = ["serde"] }
 egg = "0.10"
 pest = "2.7"
 pest_derive = "2.7"
-inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "llvm18-0", features = ["llvm18-0"] }
+inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm18-0"] }
 wasmtime = { version = "20.0", features = ["component-model-async", "cranelift"] }
 
 [profile.release]
