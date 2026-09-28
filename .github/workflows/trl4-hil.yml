@@ -17,8 +17,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Purge Toolchain Lock Files
-        run: rm -f rust-toolchain rust-toolchain.toml
+      - name: Recursively Purge All Toolchain Pins
+        run: |
+          find . -name "rust-toolchain*" -type f -delete
 
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -27,8 +28,10 @@ jobs:
           override: true
           components: clippy, rustfmt
 
-      - name: Verify Active Toolchain Version
+      - name: Enforce Default Toolchain Override
         run: |
+          rustup default stable
+          rustup override set stable
           rustc --version
           cargo --version
 
