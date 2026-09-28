@@ -1,8 +1,0 @@
-module xeno_biology;
-
-import kardashev_core;
-
-dimension MetabolicRate = Power / Mass;
-dimension GeneticInformationDensity = Information / Mass;
-
-unit biological_watt_per_kg: MetabolicRate = 1.0_W / 1.0_kg;
