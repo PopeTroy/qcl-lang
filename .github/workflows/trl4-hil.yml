@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install System Dependencies (LLVM 18, Clang 18, Z3)
+      - name: Install System Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y llvm-18 llvm-18-dev clang-18 z3 libz3-dev
@@ -22,14 +22,14 @@ jobs:
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: '1.79.0'
+          toolchain: 'stable'
           components: clippy, rustfmt
 
       - name: Check Workspace Topology
         run: cargo check --workspace
 
-      - name: Build Hardware Simulators & Release Binary
+      - name: Build Workspace Release
         run: cargo build --workspace --release
 
-      - name: Run Hardware Loop Benchmarks
+      - name: Run Workspace Tests
         run: cargo test --workspace
