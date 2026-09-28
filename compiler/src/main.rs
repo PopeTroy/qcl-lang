@@ -24,7 +24,7 @@ fn main() -> Result<()> {
 
     // Test LLVM Codegen Setup
     let context = Context::create();
-    let codegen = LlvmCodegen::new(&context, "qcl_core");
+    let mut codegen = LlvmCodegen::new(&context, "qcl_core");
     let struct_ty = codegen.get_uncertain_tensor_type();
     
     println!("Generated LLVM Type Structure: StructType({:?})", struct_ty);
