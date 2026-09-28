@@ -2,8 +2,8 @@
 # XENO-TRL4 TOOLCHAIN PINNING
 set -euo pipefail
 
-export RUST_VERSION="1.80.1"
-export RUSTUP_TOOLCHAIN="stable-2024-08-15"
+export RUST_VERSION="stable"
+export RUSTUP_TOOLCHAIN="stable"
 
 export LLVM_VERSION="18.1.8"
 export LLVM_SYS_181_PREFIX="/opt/llvm-18.1.8"
