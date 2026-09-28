@@ -35,7 +35,7 @@ egg = "0.10"
 pest = "2.7"
 pest_derive = "2.7"
 inkwell = { version = "0.4.0", features = ["llvm15-0"] }
-wasmtime = { version = "20.0", features = ["component-model-async", "cranelift"] }
+wasmtime = { version = "20.0", features = ["component-model", "async", "cranelift"] }
 
 [profile.release]
 lto = "fat"
