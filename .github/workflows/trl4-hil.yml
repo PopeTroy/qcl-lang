@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Purge Toolchain Pin Files
+      - name: Purge Legacy Toolchain Lock Files
         run: rm -f rust-toolchain rust-toolchain.toml
 
       - name: Setup Rust Toolchain
