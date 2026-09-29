@@ -14,21 +14,31 @@ jobs:
     - name: Checkout Codebase
       uses: actions/checkout@v4
 
-    - name: Install System Dependencies (LLVM 18 & Z3)
+    - name: Install System Dependencies (LLVM 18, Z3, Polly)
       run: |
         sudo apt-get update
-        sudo apt-get install -y llvm-18 llvm-18-dev clang-18 libz3-dev z3
+        sudo apt-get install -y z3 libz3-dev llvm-18-dev libclang-18-dev clang libpolly-18-dev
+
+    - name: Install Rust Toolchain (Stable / Edition 2024)
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+        components: clippy, rustfmt
+
+    - name: Update Rust Toolchain
+      run: |
+        rustup update stable
+        rustup default stable
+        rustc --version
+        cargo --version
 
     - name: Set Environment Toolchains
       run: |
-        chmod +x ./scripts/toolchain_pins.sh
-        source ./scripts/toolchain_pins.sh
+        if [ -f ./scripts/toolchain_pins.sh ]; then
+          chmod +x ./scripts/toolchain_pins.sh
+          source ./scripts/toolchain_pins.sh
+        fi
         echo "LLVM_SYS_181_PREFIX=/usr/lib/llvm-18" >> $GITHUB_ENV
-
-    - name: Install Rust Toolchain
-      uses: dtolnay/rust-toolchain@stable
-      with:
-        toolchain: "1.79.0"
 
     - name: Workspace Verification
       run: cargo check --workspace
